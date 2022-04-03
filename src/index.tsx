@@ -1,7 +1,10 @@
 import React from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
+import Routes from "@/routes";
 
-render(
-  <div>Movie Viewer Client</div>,
-  document.getElementById("root") as HTMLElement
+const root = createRoot(document.getElementById("root") as HTMLElement);
+root.render(
+  <div id="app">
+    <Routes />
+  </div>
 );

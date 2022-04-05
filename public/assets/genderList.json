@@ -1,0 +1,14 @@
+[
+  {
+    "value": 0,
+    "category": "Male"
+  },
+  {
+    "value": 1,
+    "category": "Female"
+  },
+  {
+    "value": 2,
+    "category": "Unknown"
+  }
+]

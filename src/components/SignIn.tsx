@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Button, InputField, Select } from "./form";
 import { Colors } from "@/enums/style";
+import { Gender } from "@/enums/userInfo";
 import {
   InputFieldName,
   InputFieldLabel,
@@ -11,6 +12,7 @@ import {
 } from "@/enums/form";
 import { User } from "@/typings/models/user";
 import countriesData from "public/assets/countries.json";
+import genderListData from "public/assets/genderList.json";
 
 export default function SignIn() {
   const [isSignIn, toggleIsSignIn] = useState(true);
@@ -20,10 +22,14 @@ export default function SignIn() {
     name: "",
     country: "AF",
     age: 20,
+    gender: Gender.MALE,
   });
   const [countries, setCountries] = useState<{ name: string; code: string }[]>(
     []
   );
+  const [genderList, setGenderList] = useState<
+    { value: number; category: string }[]
+  >([]);
 
   const handleSubmitting = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,8 +43,15 @@ export default function SignIn() {
     </option>
   ));
 
+  const returnGenderOptions = genderList.map((gender, index) => (
+    <option key={index} value={gender.value}>
+      {gender.category}
+    </option>
+  ));
+
   useEffect(() => {
     setCountries(countriesData);
+    setGenderList(genderListData);
   }, []);
 
   return (
@@ -92,6 +105,18 @@ export default function SignIn() {
             }))
           }
           options={returnCountryOptions}
+        />
+        <Select
+          name={InputFieldName.GENDER}
+          label={InputFieldLabel.GENDER}
+          selectValue={user.gender}
+          onChange={(e: any) =>
+            setUser((prevState: User) => ({
+              ...prevState,
+              gender: e.target.value,
+            }))
+          }
+          options={returnGenderOptions}
         />
         <InputField
           name={InputFieldName.AGE}

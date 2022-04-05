@@ -18,7 +18,7 @@ export default function TopNavBar({ children }: Props) {
             <h1>Movie Viewer</h1>
           </Link>
         </div>
-        <div>{children}</div>
+        <div className="children">{children}</div>
         <UserProfileIcon />
       </div>
     </TopNavBarContainer>
@@ -40,6 +40,10 @@ const TopNavBarContainer = styled.div`
     h1 {
       font-size: 1.5rem;
       color: ${Colors.LIGHT_BLUE};
+    }
+
+    .children {
+        width: 30%;
     }
 
     .profileIcon {

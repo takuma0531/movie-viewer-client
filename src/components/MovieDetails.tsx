@@ -23,10 +23,7 @@ export default function MovieDetails() {
             <p>{movie.description}</p>
           </div>
           <div className="ratingWrapper">
-            <div className="rating">
-              {/* movie.averageRating TODO: */}
-              Rating: 0/5
-            </div>
+            <div className="rating">Rating: 0/5</div>
             <div className="ratingButtonWrapper">rating button</div>
           </div>
         </div>

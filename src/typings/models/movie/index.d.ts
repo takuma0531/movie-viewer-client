@@ -1,3 +1,7 @@
+import { Comment } from "../comment";
+import { Rating } from "../rating";
+import { User } from "../user";
+
 export interface Movie {
   id?: string;
   title: string;
@@ -6,6 +10,8 @@ export interface Movie {
   thumbnail?: Buffer | string;
   director?: string;
   artists?: string[];
-  comments?: string[] | any[];
-  ratings?: string[] | any[];
+  user?: string | User;
+  averageRating?: number;
+  comments?: Comment[];
+  ratings?: Rating[];
 }

@@ -5,31 +5,46 @@ import MovieArticle from "./section/MovieArticle";
 
 export default function MovieList() {
   const movieList: Movie[] = [
-    { title: "movie1", genre: "genre1", description: "desc desc desc" },
-    { title: "movie2", genre: "genre2", description: "desc desc desc" },
     {
+      id: "1",
+      title: "movie1",
+      genre: "genre1",
+      description: "desc desc desc",
+    },
+    {
+      id: "2",
+      title: "movie2",
+      genre: "genre2",
+      description: "desc desc desc",
+    },
+    {
+      id: "3",
       title: "movie3333333333333333333333333",
       genre: "genre3",
       description: "desc desc desc desc desc desc desc desc desc",
     },
     {
+      id: "4",
       title: "movie3movie3movie3movie3movie3movie3movie3movie3movie3",
       genre: "genre3",
       description:
         "desc desc desc desc descritionasd desc desc descasdfasdf desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc",
     },
     {
+      id: "5",
       title: "movie3",
       genre: "genre3",
       description:
         "desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc",
     },
     {
+      id: "6",
       title: "movie3",
       genre: "genre3",
       description: "desc desc desc desc desc desc desc desc desc",
     },
     {
+      id: "7",
       title: "movie3",
       genre: "genre3",
       description: "desc desc desc desc desc desc desc desc desc",

@@ -7,7 +7,7 @@ import {
   SignInPage,
   UserProfilePage,
 } from "@/pages";
-import { RoutePath } from "@/enums/routePath";
+import { RoutePath, Query } from "@/enums/routePath";
 
 // TODO:
 export default function RouteHandler() {

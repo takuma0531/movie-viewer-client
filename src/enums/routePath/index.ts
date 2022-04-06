@@ -4,3 +4,7 @@ export enum RoutePath {
   SIGNIN = "/sign-in",
   USER_PROFILE = "user-profile",
 }
+
+export enum Query {
+  MOVIEID = "movieId",
+}

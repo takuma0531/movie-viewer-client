@@ -1,15 +1,23 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Movie } from "@/typings/models/movie";
 import { Colors } from "@/enums/style";
+import { RoutePath, Query } from "@/enums/routePath";
 
 interface Props {
   movie: Movie;
 }
 
 export default function MovieArticle({ movie }: Props) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`${RoutePath.MOVIE_DETAIL}?${Query.MOVIEID}=${movie.id}`);
+  };
+
   return (
-    <MovieArticleContainer>
+    <MovieArticleContainer onClick={() => handleClick()}>
       <div className="header">
         <h3>{movie.title}</h3>
         <div className="rating">Rating: 0/5</div>
@@ -23,6 +31,7 @@ export default function MovieArticle({ movie }: Props) {
 }
 
 const MovieArticleContainer = styled.div`
+  cursor: pointer;
   margin: 0 auto;
   width: 50%;
   height: 30%;

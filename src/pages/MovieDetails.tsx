@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Colors } from "@/enums/style";
 import TopNavBar from "@/components/layout/navigation/TopNavBar";
+import MovieDetailsComponent from "@/components/MovieDetails";
 
 export default function MovieDetails() {
   return (
@@ -9,7 +10,9 @@ export default function MovieDetails() {
       <div className="topNavbarWrapper">
         <TopNavBar></TopNavBar>
       </div>
-      <div className="bodyWrapper">Movie Details</div>
+      <div className="bodyWrapper">
+        <MovieDetailsComponent />
+      </div>
     </MovieDetailsContainer>
   );
 }

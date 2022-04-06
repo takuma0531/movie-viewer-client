@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Colors } from "@/enums/style";
 import TopNavBar from "@/components/layout/navigation/TopNavBar";
 import MovieSearcher from "@/components/layout/navigation/MovieSearcher";
+import MovieList from "@/components/MovieList";
 
 export default function Home() {
   return (
@@ -12,15 +13,18 @@ export default function Home() {
           <MovieSearcher />
         </TopNavBar>
       </div>
-      <div className="bodyWrapper">Movie list</div>
+      <div className="bodyWrapper">
+        <MovieList />
+      </div>
     </HomeContainer>
   );
 }
 
 const HomeContainer = styled.div`
   .bodyWrapper {
+    max-width: 100%;
     width: 1200px;
-    height: 500px;
+    height: 700px;
     margin: 0 auto;
     background-color: ${Colors.WHITE};
     display: flex;

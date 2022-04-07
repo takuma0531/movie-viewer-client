@@ -5,6 +5,7 @@ export enum InputFieldName {
   COUNTRY = "country",
   AGE = "age",
   GENDER = "gender",
+  COMMENT = "comment",
 }
 
 export enum InputFieldType {

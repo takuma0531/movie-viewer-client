@@ -31,7 +31,7 @@ export default function UpdateUserProfile({ onClose }: Props) {
     </option>
   ));
 
-  const handleSubmitting = (e: any) => {
+  const handleSubmitting = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(user);
     console.log("update user");

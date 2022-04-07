@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Colors } from "@/enums/style";
 import CommentRow from "./CommentRow";
+import CommentInputField from "./CommentInputField";
 
 export default function CommentList() {
   return (
     <CommentListContainer>
+      <CommentInputField />
       <CommentRow />
       <CommentRow />
       <CommentRow />

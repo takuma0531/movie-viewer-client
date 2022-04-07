@@ -30,6 +30,7 @@ export enum ButtonText {
   SEARCH = "Search",
   CONFIRM = "Confirm",
   EDITPROFILE = "Edit Profile",
+  CLOSE = "Close",
 }
 
 export enum FormTitle {

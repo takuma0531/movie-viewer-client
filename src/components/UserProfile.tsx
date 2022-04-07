@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Colors } from "@/enums/style";
@@ -7,10 +7,12 @@ import { Movie } from "@/typings/models/movie";
 import { ButtonText } from "@/enums/form";
 import MovieArticle from "./section/MovieArticle";
 import { Button } from "./form";
-import { RoutePath } from "@/enums/routePath";
+import ModalWrapper from "./modal";
+import UpdateUserProfile from "./modal/content/UpdateUserProfile";
 
 export default function UserProfile() {
   const navigate = useNavigate();
+  const toggleVisibilityForUpdatingUserProfile = useRef<any>();
   const [user, setUser] = useState<User>({
     email: "",
     name: "user1",
@@ -68,16 +70,21 @@ export default function UserProfile() {
     else navigate("/", { replace: true });
   };
 
-  const openEditProfileModal = () => {
-    console.log("open edit profile modal");
-  };
-
   const renderMovieList = movieList.map((movie: Movie, index: number) => (
     <MovieArticle key={index} movie={movie} />
   ));
 
+  useEffect(() => {
+    toggleVisibilityForUpdatingUserProfile.current(true);
+  });
+
   return (
     <UserProfileContainer>
+      <ModalWrapper toggleVisibility={toggleVisibilityForUpdatingUserProfile}>
+        <UpdateUserProfile
+          onClose={() => toggleVisibilityForUpdatingUserProfile.current(false)}
+        />
+      </ModalWrapper>
       <div className="userProfileHeader">
         <Button
           text={"<<"}
@@ -103,7 +110,7 @@ export default function UserProfile() {
             fontWeight={"500"}
             padding={"7px 14px"}
             color={Colors.WHITE}
-            onClick={() => openEditProfileModal()}
+            onClick={() => toggleVisibilityForUpdatingUserProfile.current(true)}
           />
         </div>
       </div>

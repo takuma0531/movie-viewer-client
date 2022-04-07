@@ -11,7 +11,11 @@ import { Colors } from "@/enums/style";
 import { User } from "@/typings/models/user";
 import countriesData from "public/assets/countries.json";
 
-export default function UpdateUserProfile() {
+interface Props {
+  onClose: any;
+}
+
+export default function UpdateUserProfile({ onClose }: Props) {
   const [user, setUser] = useState<User>({
     email: "",
     name: "",
@@ -27,10 +31,11 @@ export default function UpdateUserProfile() {
     </option>
   ));
 
-  const handleSubmitting = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitting = (e: any) => {
     e.preventDefault();
     console.log(user);
     console.log("update user");
+    onClose();
   };
 
   useEffect(() => {
@@ -40,6 +45,26 @@ export default function UpdateUserProfile() {
   return (
     <UpdateUserProfileContainer>
       <FormContainer onSubmit={(e) => handleSubmitting(e)}>
+        <div className="buttonSection">
+          <Button
+            text={ButtonText.CLOSE}
+            border={"none"}
+            fontSize={"14px"}
+            fontWeight={"500"}
+            color={Colors.BLACK}
+            onClick={() => onClose()}
+          />
+          <Button
+            padding={"4px 8px"}
+            text={ButtonText.CONFIRM}
+            borderRadius={"20px"}
+            backgroundColor={Colors.BLACK}
+            backgroundColorOnHover={Colors.LIGHT_BLACK}
+            fontSize={"14px"}
+            fontWeight={"500"}
+            color={Colors.WHITE}
+          />
+        </div>
         <InputField
           name={InputFieldName.NAME}
           type={InputFieldType.TEXT}
@@ -76,20 +101,33 @@ export default function UpdateUserProfile() {
           }
           options={returnCountryOptions}
         />
-        <Button
-          text={ButtonText.CONFIRM}
-          borderRadius={"20px"}
-          backgroundColor={Colors.LIGHT_BLUE}
-          backgroundColorOnHover={Colors.DEEP_BLUE}
-          fontSize={"16px"}
-          fontWeight={"500"}
-          color={Colors.WHITE}
-        />
       </FormContainer>
     </UpdateUserProfileContainer>
   );
 }
 
-const UpdateUserProfileContainer = styled.div``;
+const UpdateUserProfileContainer = styled.div`
+  width: 450px;
+  height: 490px;
+  margin: 0 auto;
+  background: ${Colors.WHITE};
+  border-radius: 5px;
+`;
 
-const FormContainer = styled.form``;
+const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  width: 80%;
+  margin: 0 auto;
+
+  .buttonSection {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  * {
+    margin: 3px 0;
+  }
+`;

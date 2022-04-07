@@ -4,6 +4,7 @@ import { Colors } from "@/enums/style";
 import TopNavBar from "@/components/layout/navigation/TopNavBar";
 import MovieSearcher from "@/components/layout/navigation/MovieSearcher";
 import MovieList from "@/components/MovieList";
+import CreateMovieThreadButton from "@/components/utils/CreateMovieThreadButton";
 
 export default function Home() {
   return (
@@ -14,6 +15,9 @@ export default function Home() {
         </TopNavBar>
       </div>
       <div className="bodyWrapper">
+        <div className="createMovieThreadButtonWrapper">
+          <CreateMovieThreadButton />
+        </div>
         <MovieList />
       </div>
     </HomeContainer>
@@ -33,5 +37,11 @@ const HomeContainer = styled.div`
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     border-radius: 10px;
+
+    .createMovieThreadButtonWrapper {
+      position: absolute;
+      top: 50%;
+      left: 7%;
+    }
   }
 `;

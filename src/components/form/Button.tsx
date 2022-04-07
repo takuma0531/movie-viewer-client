@@ -1,3 +1,4 @@
+import { ButtonType } from "@/enums/form";
 import React from "react";
 import styled from "styled-components";
 
@@ -19,11 +20,13 @@ interface StyleProps {
 }
 
 interface Props extends StyleProps {
+  type?: any;
   text: any;
   onClick?: any;
 }
 
 export default function Button({
+  type = ButtonType.SUBMIT,
   text,
   onClick,
   borderRadius = "10px",
@@ -43,6 +46,7 @@ export default function Button({
 }: Props) {
   return (
     <ButtonContainer
+      type={type}
       onClick={onClick}
       borderRadius={borderRadius}
       border={border}

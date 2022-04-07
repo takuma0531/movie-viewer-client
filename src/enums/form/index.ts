@@ -6,6 +6,11 @@ export enum InputFieldName {
   AGE = "age",
   GENDER = "gender",
   COMMENT = "comment",
+  TITlE = "title",
+  DESCRIPTION = "description",
+  GENRE = "genre",
+  DIRECTOR = "director",
+  ARTIST = "artist",
 }
 
 export enum InputFieldType {
@@ -23,6 +28,11 @@ export enum InputFieldLabel {
   COUNTRY = "Country",
   AGE = "Age",
   GENDER = "Gender",
+  TITLE = "Title",
+  DESCRIPTION = "Description",
+  GENRE = "Genre",
+  DIRECTOR = "Director",
+  ARTIST = "Artist",
 }
 
 export enum ButtonText {
@@ -32,6 +42,14 @@ export enum ButtonText {
   CONFIRM = "Confirm",
   EDITPROFILE = "Edit Profile",
   CLOSE = "Close",
+  CREATEMOVIE = "Create Movie",
+  ADD = "Add",
+}
+
+export enum ButtonType {
+  SUBMIT = "submit",
+  BUTTON = "button",
+  RESET = "reset",
 }
 
 export enum FormTitle {

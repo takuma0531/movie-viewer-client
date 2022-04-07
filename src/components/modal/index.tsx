@@ -28,8 +28,8 @@ export default function ModalWrapper({
 
 const ModalWrapperContainer = styled.div`
   position: fixed;
-  top: -20;
-  left: -20;
+  top: -17.2%;
+  left: -30%;
   width: 100vw;
   height: 100vh;
   background: ${Colors.LIGHT_GRAY};

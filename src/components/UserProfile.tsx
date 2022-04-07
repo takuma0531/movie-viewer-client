@@ -75,7 +75,7 @@ export default function UserProfile() {
   ));
 
   useEffect(() => {
-    toggleVisibilityForUpdatingUserProfile.current(true);
+    toggleVisibilityForUpdatingUserProfile.current(false);
   });
 
   return (

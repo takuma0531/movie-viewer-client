@@ -25,10 +25,10 @@ const MovieDetailsContainer = styled.div`
     margin: 0 auto;
     background-color: ${Colors.WHITE};
     display: flex;
-
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
+    border-radius: 10px;
   }
 `;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Colors } from "@/enums/style";
 import { RoutePath } from "@/enums/routePath";
@@ -31,7 +31,7 @@ export default function UserProfileIcon({}: Props) {
         {isProfileMenuOpen && (
           <ul className="menu">
             <li>
-              <Link to={RoutePath.USER_PROFILE}>Profile</Link>
+              <Link to={`../${RoutePath.USER_PROFILE}`}>Profile</Link>
             </li>
             {isAuthenticated ? (
               <li onClick={() => handleLogout()}>Logout</li>

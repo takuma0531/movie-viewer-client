@@ -4,7 +4,7 @@ export enum InputFieldName {
   NAME = "name",
   COUNTRY = "country",
   AGE = "age",
-  GENDER = "gender"
+  GENDER = "gender",
 }
 
 export enum InputFieldType {
@@ -21,7 +21,7 @@ export enum InputFieldLabel {
   NAME = "Name",
   COUNTRY = "Country",
   AGE = "Age",
-  GENDER = "Gender"
+  GENDER = "Gender",
 }
 
 export enum ButtonText {
@@ -29,6 +29,7 @@ export enum ButtonText {
   SIGNUP = "Sign up",
   SEARCH = "Search",
   CONFIRM = "Confirm",
+  EDITPROFILE = "Edit Profile",
 }
 
 export enum FormTitle {

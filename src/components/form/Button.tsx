@@ -65,6 +65,7 @@ export default function Button({
 }
 
 const ButtonContainer = styled.button<StyleProps>`
+  text-align: center;
   padding: ${({ padding }) => padding};
   border-radius: ${({ borderRadius }) => borderRadius};
   border: ${({ border }) => border};

@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "@/components/routing/PrivateRoute";
 import {
   HomePage,
@@ -7,11 +7,10 @@ import {
   SignInPage,
   UserProfilePage,
 } from "@/pages";
-import { RoutePath, Query } from "@/enums/routePath";
+import { RoutePath } from "@/enums/routePath";
 
-// TODO:
 export default function RouteHandler() {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
 
   return (
     <BrowserRouter>
@@ -19,39 +18,19 @@ export default function RouteHandler() {
         <Routes>
           <Route
             path={RoutePath.HOME}
-            element={PrivateRoute(
-              HomePage,
-              RoutePath.HOME,
-              isAuthenticated,
-              true
-            )}
+            element={PrivateRoute(HomePage, isAuthenticated, true)}
           />
           <Route
             path={RoutePath.MOVIE_DETAIL}
-            element={PrivateRoute(
-              MovieDetailsPage,
-              RoutePath.MOVIE_DETAIL,
-              isAuthenticated,
-              true
-            )}
+            element={PrivateRoute(MovieDetailsPage, isAuthenticated, true)}
           />
           <Route
             path={RoutePath.SIGNIN}
-            element={PrivateRoute(
-              SignInPage,
-              RoutePath.SIGNIN,
-              isAuthenticated,
-              true
-            )}
+            element={PrivateRoute(SignInPage, isAuthenticated, true)}
           />
           <Route
             path={RoutePath.USER_PROFILE}
-            element={PrivateRoute(
-              UserProfilePage,
-              RoutePath.USER_PROFILE,
-              isAuthenticated,
-              false
-            )}
+            element={PrivateRoute(UserProfilePage, isAuthenticated, false)}
           />
           <Route path="*" element={<div>404</div>} />
         </Routes>

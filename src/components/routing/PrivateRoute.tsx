@@ -4,16 +4,11 @@ import { RoutePath } from "@/enums/routePath";
 
 export default function PrivateElement(
   Element: any,
-  redirectTo: string,
   isAuthenticated: boolean,
   isPublic: boolean
 ): JSX.Element {
   return isPublic ? (
-    isAuthenticated ? (
-      <Navigate replace to={`${redirectTo || "/"}`} />
-    ) : (
-      <Element />
-    )
+    <Element />
   ) : isAuthenticated ? (
     <Element />
   ) : (

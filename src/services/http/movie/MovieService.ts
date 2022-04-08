@@ -74,6 +74,7 @@ class MovieService extends BaseHttpService implements IMovieService {
 
   public async updateMovie(movie: Movie): Promise<Movie> {
     try {
+      this.setToken();
       const { data } = await this.axiosApi.put<Movie>(
         `${this.BASE_ROUTE}`,
         movie
@@ -86,6 +87,7 @@ class MovieService extends BaseHttpService implements IMovieService {
 
   public async deleteMovie(movieId: string): Promise<void> {
     try {
+      this.setToken();
       await this.axiosApi.delete<void>(`${this.BASE_ROUTE}/${movieId}`);
     } catch (err: any) {
       throw err;

@@ -8,24 +8,24 @@ export interface Rating {
 }
 
 export interface RatingsFilteredByUserAge {
-  lte20: Rating[];
-  lte40: Rating[];
-  lte60: Rating[];
-  gte61: Rating[];
+  lte20: number;
+  lte40: number;
+  lte60: number;
+  gte61: number;
 }
 
 export interface RatingsFilteredByUserLocation {
-  asia: Rating[];
-  africa: Rating[];
-  europe: Rating[];
-  northAmerica: Rating[];
-  southAmerica: Rating[];
-  oceania: Rating[];
-  antarctica: Rating[];
+  asia: number;
+  africa: number;
+  europe: number;
+  northAmerica: number;
+  southAmerica: number;
+  oceania: number;
+  antarctica: number;
 }
 
 export interface RatingSortedByUserGender {
-  male: Rating[];
-  female: Rating[];
-  unknown: Rating[];
+  male: number;
+  female: number;
+  unknown: number;
 }

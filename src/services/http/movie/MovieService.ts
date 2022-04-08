@@ -1,7 +1,6 @@
-import { IRatingService } from "../rating/IRatingService";
+import { IMovieService } from "./IMovieService";
 import { BaseHttpService } from "../base/BaseHttpService";
 import { Movie } from "@/typings/models/movie";
-import { IMovieService } from "./IMovieService";
 
 const URL_PATH = {
   MOVIE: "movie",

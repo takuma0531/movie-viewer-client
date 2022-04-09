@@ -9,72 +9,28 @@ import MovieArticle from "./section/MovieArticle";
 import { Button } from "./form";
 import ModalWrapper from "./modal";
 import UpdateUserProfile from "./modal/content/UpdateUserProfile";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { selectUser, getUserById } from "@/store/features/userSlice";
 
 export default function UserProfile() {
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector(selectUser);
   const navigate = useNavigate();
   const toggleVisibilityForUpdatingUserProfile = useRef<any>();
-  const [user, setUser] = useState<User>({
-    email: "",
-    name: "user1",
-    country: "",
-  });
-  const movieList: Movie[] = [
-    {
-      id: "1",
-      title: "movie1",
-      genre: "genre1",
-      description: "desc desc desc",
-    },
-    {
-      id: "2",
-      title: "movie2",
-      genre: "genre2",
-      description: "desc desc desc",
-    },
-    {
-      id: "3",
-      title: "movie3333333333333333333333333",
-      genre: "genre3",
-      description: "desc desc desc desc desc desc desc desc desc",
-    },
-    {
-      id: "4",
-      title: "movie3movie3movie3movie3movie3movie3movie3movie3movie3",
-      genre: "genre3",
-      description:
-        "desc desc desc desc descritionasd desc desc descasdfasdf desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc",
-    },
-    {
-      id: "5",
-      title: "movie3",
-      genre: "genre3",
-      description:
-        "desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc desc",
-    },
-    {
-      id: "6",
-      title: "movie3",
-      genre: "genre3",
-      description: "desc desc desc desc desc desc desc desc desc",
-    },
-    {
-      id: "7",
-      title: "movie3",
-      genre: "genre3",
-      description: "desc desc desc desc desc desc desc desc desc",
-    },
-  ];
+
+  const head = user.name?.charAt(0).toUpperCase() || "N";
 
   const goBackToPreviousPage = () => {
     if (window.history.state && window.history.state.idx > 0) navigate(-1);
     else navigate("/", { replace: true });
   };
 
-  const renderMovieList = movieList.map((movie: Movie, index: number) => (
+  const renderMovieList = user.movies?.map((movie: Movie, index: number) => (
     <MovieArticle key={index} movie={movie} />
   ));
 
   useEffect(() => {
+    dispatch(getUserById());
     toggleVisibilityForUpdatingUserProfile.current(false);
   });
 
@@ -97,7 +53,9 @@ export default function UserProfile() {
       </div>
       <div className="userAttribute">
         <div className="userInfo">
-          <div className="userIcon"></div>
+          <div className="userIcon">
+            <p>{head}</p>
+          </div>
           <div className="username">{user.name}</div>
         </div>
         <div className="editProfileButtonWrapper">
@@ -124,6 +82,7 @@ const UserProfileContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 100%;
 
   .userProfileHeader {
     height: 10%;
@@ -144,11 +103,22 @@ const UserProfileContainer = styled.div`
       align-items: center;
 
       .userIcon {
+        position: relative;
         width: 80px;
         height: 80px;
         border: 1px solid ${Colors.WHITE_GRAY};
         border-radius: 50%;
         margin-bottom: 5px;
+
+        p {
+          color: ${Colors.LIGHT_BLUE};
+          font-size: 1.5rem;
+          position: absolute;
+          margin: 0;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
       }
     }
 
@@ -159,6 +129,7 @@ const UserProfileContainer = styled.div`
   }
 
   .movieList {
+    width: 70%;
     height: 70%;
     overflow-y: scroll;
   }

@@ -9,7 +9,7 @@ import {
 } from "@/enums/form";
 import { Colors } from "@/enums/style";
 import { User } from "@/typings/models/user";
-import countriesData from "public/assets/countries.json";
+import countriesData from "public/assets/countryInfo.json";
 
 interface Props {
   onClose: any;
@@ -21,13 +21,13 @@ export default function UpdateUserProfile({ onClose }: Props) {
     name: "",
     country: "",
   });
-  const [countries, setCountries] = useState<{ name: string; code: string }[]>(
+  const [countries, setCountries] = useState<{ country: string; continent: string }[]>(
     []
   );
 
   const returnCountryOptions = countries.map((country, index) => (
-    <option key={index} value={country.code}>
-      {country.name}
+    <option key={index} value={country.country}>
+      {country.country}
     </option>
   ));
 

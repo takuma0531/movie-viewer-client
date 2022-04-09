@@ -1,3 +1,5 @@
+import { Movie } from "../movie";
+
 export interface User {
   email?: string;
   password?: string;
@@ -7,6 +9,7 @@ export interface User {
   role?: number;
   age?: number;
   gender?: number;
+  movies?: Movie[];
   authResult?: AuthorizedResult;
 }
 

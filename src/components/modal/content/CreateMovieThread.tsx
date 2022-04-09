@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Colors } from "@/enums/style";
 import { Button, InputField, Select } from "../../form";
 import { ButtonText, InputFieldLabel } from "@/enums/form";
 import { InputFieldName, InputFieldType, ButtonType } from "@/enums/form";
 import { Movie } from "@/typings/models/movie";
-import { useAppDispatch } from "@/store/hooks";
+import { Genre } from "@/typings/models/genre";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createMovie } from "@/store/features/movieSlice";
-// TODO: get all genres
+import { getAllGenres, selectGenre } from "@/store/features/genreSlice";
 
 interface Props {
   onClose: any;
@@ -15,6 +16,7 @@ interface Props {
 
 export default function CreateMovieThread({ onClose }: Props) {
   const dispatch = useAppDispatch();
+  const { genres } = useAppSelector(selectGenre);
   const [movie, setMovie] = useState<Movie>({
     title: "",
     description: "",
@@ -55,11 +57,18 @@ export default function CreateMovieThread({ onClose }: Props) {
     setNewArtist("");
   };
 
+  const renderGenreOptions = genres.map((genre: Genre, index: number) => (
+    <option key={index}>{genre.name}</option>
+  ));
+
   const handleSubmitting = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await dispatch(createMovie(movie));
-    console.log("submit movie data");
   };
+
+  useEffect(() => {
+    dispatch(getAllGenres());
+  }, []);
 
   return (
     <CreateMovieThreadContainer>
@@ -120,7 +129,7 @@ export default function CreateMovieThread({ onClose }: Props) {
               genre: e.target.value,
             }))
           }
-          options={<option>TODO:</option>}
+          options={renderGenreOptions}
         />
         {/* Thumbnail to add TODO: */}
         thumbnail field

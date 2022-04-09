@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate, NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Colors } from "@/enums/style";
 import { RoutePath } from "@/enums/routePath";

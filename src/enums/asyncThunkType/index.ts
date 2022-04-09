@@ -4,6 +4,12 @@ export enum AsyncThunkTypeComment {
   DELETE_COMMENT = "comment/deleteComment",
 }
 
+export enum AsyncThunkTypeGenre {
+  GET_ALL_GENRES = "genre/getAllGenres",
+  GET_GENRE_BY_NAME = "genre/getGenreByName",
+  GET_GENRE_BY_Id = "genre/getGenreById",
+}
+
 export enum AsyncThunkTypeMovie {
   GET_ALL_MOVIES = "movie/getAllMovies",
   GET_MOVIE_BY_ID = "movie/getMovieById",

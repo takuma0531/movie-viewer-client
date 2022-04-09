@@ -10,20 +10,23 @@ import {
 import { Colors } from "@/enums/style";
 import { User } from "@/typings/models/user";
 import countriesData from "public/assets/countryInfo.json";
+import { useAppDispatch } from "@/store/hooks";
+import { updateUser } from "@/store/features/userSlice";
 
 interface Props {
   onClose: any;
 }
 
 export default function UpdateUserProfile({ onClose }: Props) {
+  const dispatch = useAppDispatch();
   const [user, setUser] = useState<User>({
     email: "",
     name: "",
     country: "",
   });
-  const [countries, setCountries] = useState<{ country: string; continent: string }[]>(
-    []
-  );
+  const [countries, setCountries] = useState<
+    { country: string; continent: string }[]
+  >([]);
 
   const returnCountryOptions = countries.map((country, index) => (
     <option key={index} value={country.country}>
@@ -31,10 +34,10 @@ export default function UpdateUserProfile({ onClose }: Props) {
     </option>
   ));
 
-  const handleSubmitting = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitting = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user);
     console.log("update user");
+    await dispatch(updateUser(user));
     onClose();
   };
 

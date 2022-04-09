@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
   commentReducer,
+  genreReducer,
   movieReducer,
   ratingReducer,
   userReducer,
@@ -9,6 +10,7 @@ import {
 const store = configureStore({
   reducer: {
     comment: commentReducer,
+    genre: genreReducer,
     movie: movieReducer,
     rating: ratingReducer,
     user: userReducer,

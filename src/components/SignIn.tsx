@@ -11,35 +11,38 @@ import {
   FormTitle,
 } from "@/enums/form";
 import { User } from "@/typings/models/user";
-import countriesData from "public/assets/countries.json";
+import countriesData from "public/assets/countryInfo.json";
 import genderListData from "public/assets/genderList.json";
+import { useAppDispatch } from "@/store/hooks";
+import { registerUser, loginUser } from "@/store/features/userSlice";
 
 export default function SignIn() {
+  const dispatch = useAppDispatch();
+
   const [isSignIn, toggleIsSignIn] = useState(true);
   const [user, setUser] = useState<User>({
     email: "",
     password: "",
     name: "",
-    country: "AF",
+    country: "Afghanistan",
     age: 20,
     gender: Gender.MALE,
   });
-  const [countries, setCountries] = useState<{ name: string; code: string }[]>(
-    []
-  );
+  const [countries, setCountries] = useState<
+    { country: string; continent: string }[]
+  >([]);
   const [genderList, setGenderList] = useState<
     { value: number; category: string }[]
   >([]);
 
   const handleSubmitting = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user);
-    isSignIn ? console.log("sign in") : console.log("sign up");
+    isSignIn ? dispatch(loginUser(user)) : dispatch(registerUser(user));
   };
 
   const returnCountryOptions = countries.map((country, index) => (
-    <option key={index} value={country.code}>
-      {country.name}
+    <option key={index} value={country.country}>
+      {country.country}
     </option>
   ));
 
@@ -82,54 +85,58 @@ export default function SignIn() {
             }))
           }
         />
-        <InputField
-          name={InputFieldName.NAME}
-          type={InputFieldType.TEXT}
-          value={user.name!}
-          label={InputFieldLabel.NAME}
-          onChange={(e) =>
-            setUser((prevState: User) => ({
-              ...prevState,
-              name: e.target.value,
-            }))
-          }
-        />
-        <Select
-          name={InputFieldName.COUNTRY}
-          label={InputFieldLabel.COUNTRY}
-          selectValue={user.country}
-          onChange={(e: any) =>
-            setUser((prevState: User) => ({
-              ...prevState,
-              country: e.target.value,
-            }))
-          }
-          options={returnCountryOptions}
-        />
-        <Select
-          name={InputFieldName.GENDER}
-          label={InputFieldLabel.GENDER}
-          selectValue={user.gender}
-          onChange={(e: any) =>
-            setUser((prevState: User) => ({
-              ...prevState,
-              gender: e.target.value,
-            }))
-          }
-          options={returnGenderOptions}
-        />
-        <InputField
-          name={InputFieldName.AGE}
-          type={InputFieldType.NUMBER}
-          value={user.age!}
-          label={InputFieldLabel.AGE}
-          onChange={(e) =>
-            setUser((prevState: User) => ({
-              ...prevState,
-              age: Number(e.target.value),
-            }))
-          }
-        />
+        {!isSignIn && (
+          <div>
+            <InputField
+              name={InputFieldName.NAME}
+              type={InputFieldType.TEXT}
+              value={user.name!}
+              label={InputFieldLabel.NAME}
+              onChange={(e) =>
+                setUser((prevState: User) => ({
+                  ...prevState,
+                  name: e.target.value,
+                }))
+              }
+            />
+            <Select
+              name={InputFieldName.COUNTRY}
+              label={InputFieldLabel.COUNTRY}
+              selectValue={user.country}
+              onChange={(e: any) =>
+                setUser((prevState: User) => ({
+                  ...prevState,
+                  country: e.target.value,
+                }))
+              }
+              options={returnCountryOptions}
+            />
+            <Select
+              name={InputFieldName.GENDER}
+              label={InputFieldLabel.GENDER}
+              selectValue={user.gender}
+              onChange={(e: any) =>
+                setUser((prevState: User) => ({
+                  ...prevState,
+                  gender: e.target.value,
+                }))
+              }
+              options={returnGenderOptions}
+            />
+            <InputField
+              name={InputFieldName.AGE}
+              type={InputFieldType.NUMBER}
+              value={user.age!}
+              label={InputFieldLabel.AGE}
+              onChange={(e) =>
+                setUser((prevState: User) => ({
+                  ...prevState,
+                  age: Number(e.target.value),
+                }))
+              }
+            />
+          </div>
+        )}
         <Button
           text={isSignIn ? ButtonText.SIGNIN : ButtonText.SIGNUP}
           borderRadius={"20px"}

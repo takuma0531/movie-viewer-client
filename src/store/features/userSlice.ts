@@ -19,7 +19,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    updateUser: (state, action: PayloadAction<User>) => {
+    replaceUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
     toggleIsAuth: (state) => {
@@ -32,7 +32,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { updateUser, toggleIsAuth, logoutUser } = userSlice.actions;
+export const { replaceUser, toggleIsAuth, logoutUser } = userSlice.actions;
 
 const thunkFunctions = {
   registerUser: createAsyncThunk(
@@ -79,3 +79,15 @@ const thunkFunctions = {
     }
   ),
 };
+
+export const {
+  registerUser,
+  getUserById,
+  loginUser,
+  updateUser,
+  deleteUser,
+  checkAuth,
+} = thunkFunctions;
+
+export const selectUser = (state: RootState) => state.user;
+export default userSlice.reducer;

@@ -3,19 +3,21 @@ import { Link, useNavigate, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Colors } from "@/enums/style";
 import { RoutePath } from "@/enums/routePath";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { selectUser, logoutUser } from "@/store/features/userSlice";
 
 interface Props {}
 
 export default function UserProfileIcon({}: Props) {
   const navigate = useNavigate();
-  const username = "test user1";
-  const head = username.charAt(0).toUpperCase();
-  const isAuthenticated = false;
+  const dispatch = useAppDispatch();
 
+  const { user, isAuthenticated } = useAppSelector(selectUser);
+  const head = user.name?.charAt(0).toUpperCase() || "N";
   const [isProfileMenuOpen, toggleIsProfileMenuOpen] = useState<boolean>(false);
 
   const handleLogout = () => {
-    console.log("logout");
+    dispatch(logoutUser());
     navigate(RoutePath.HOME);
   };
 

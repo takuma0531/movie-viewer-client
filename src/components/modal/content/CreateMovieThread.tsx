@@ -5,18 +5,22 @@ import { Button, InputField, Select } from "../../form";
 import { ButtonText, InputFieldLabel } from "@/enums/form";
 import { InputFieldName, InputFieldType, ButtonType } from "@/enums/form";
 import { Movie } from "@/typings/models/movie";
+import { useAppDispatch } from "@/store/hooks";
+import { createMovie } from "@/store/features/movieSlice";
+// TODO: get all genres
 
 interface Props {
   onClose: any;
 }
 
 export default function CreateMovieThread({ onClose }: Props) {
+  const dispatch = useAppDispatch();
   const [movie, setMovie] = useState<Movie>({
     title: "",
     description: "",
     genre: "",
     director: "",
-    artists: ["artist1", "artist2"],
+    artists: [],
   });
   const [newArtist, setNewArtist] = useState<string>("");
 
@@ -51,8 +55,9 @@ export default function CreateMovieThread({ onClose }: Props) {
     setNewArtist("");
   };
 
-  const handleSubmitting = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitting = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    await dispatch(createMovie(movie));
     console.log("submit movie data");
   };
 
@@ -166,6 +171,7 @@ const CreateMovieThreadContainer = styled.div`
   margin: 0 auto;
   background: ${Colors.WHITE};
   border-radius: 5px;
+  overflow-y: auto;
 `;
 
 const FormContainer = styled.form`
@@ -174,7 +180,6 @@ const FormContainer = styled.form`
   height: 80%;
   width: 80%;
   margin: 0 auto;
-  overflow-y: auto;
 
   .buttonSection {
     margin: 10px 0;

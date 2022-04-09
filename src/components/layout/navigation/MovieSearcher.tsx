@@ -3,14 +3,17 @@ import styled from "styled-components";
 import { InputFieldType, ButtonText } from "@/enums/form";
 import { Colors } from "@/enums/style";
 import { Button, InputField } from "@/components/form";
+import { useAppDispatch } from "@/store/hooks";
+import { getMoviesByTitle } from "@/store/features/movieSlice";
 
 interface Props {}
 
 export default function MovieSearcher({}: Props) {
+  const dispatch = useAppDispatch();
   const [inputTitle, setInputTitle] = useState<string>("");
 
   const handleSearching = async () => {
-    console.log("searching...");
+    await dispatch(getMoviesByTitle(inputTitle));
   };
 
   return (

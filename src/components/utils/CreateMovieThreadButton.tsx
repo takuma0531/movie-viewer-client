@@ -10,7 +10,7 @@ export default function CreateMovieThreadButton() {
   const toggleVisibility = useRef<any>();
 
   useEffect(() => {
-    toggleVisibility.current(true);
+    toggleVisibility.current(false);
   });
 
   return (

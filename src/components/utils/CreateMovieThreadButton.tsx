@@ -1,22 +1,34 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { Colors } from "@/enums/style";
 import ModalWrapper from "../modal";
 import CreateMovieThread from "../modal/content/CreateMovieThread";
 import { Button } from "../form";
 import { ButtonText } from "@/enums/form";
+import { RoutePath } from "@/enums/routePath";
+import { useAppSelector } from "@/store/hooks";
+import { selectUser } from "@/store/features/userSlice";
 
 export default function CreateMovieThreadButton() {
-  const toggleVisibility = useRef<any>();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAppSelector(selectUser);
+  const toggleVisibilityOfCreateModal = useRef<any>();
+
+  const handleClickButton = () => {
+    isAuthenticated
+      ? toggleVisibilityOfCreateModal.current(true)
+      : navigate(RoutePath.SIGNIN);
+  };
 
   useEffect(() => {
-    toggleVisibility.current(false);
+    toggleVisibilityOfCreateModal.current(false);
   });
 
   return (
     <CreateMovieThreadButtonContainer>
       <Button
-        onClick={() => toggleVisibility.current(true)}
+        onClick={() => handleClickButton()}
         text={ButtonText.CREATEMOVIE}
         borderRadius={"20px"}
         fontSize={"16px"}
@@ -25,8 +37,10 @@ export default function CreateMovieThreadButton() {
         backgroundColor={Colors.BLACK}
         padding={"7px 20px"}
       />
-      <ModalWrapper toggleVisibility={toggleVisibility}>
-        <CreateMovieThread onClose={() => toggleVisibility.current(false)} />
+      <ModalWrapper toggleVisibility={toggleVisibilityOfCreateModal}>
+        <CreateMovieThread
+          onClose={() => toggleVisibilityOfCreateModal.current(false)}
+        />
       </ModalWrapper>
     </CreateMovieThreadButtonContainer>
   );

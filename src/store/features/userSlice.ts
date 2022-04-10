@@ -39,7 +39,9 @@ const thunkFunctions = {
     AsyncThunkTypeUser.REGISTER_USER,
     async (user: User, { dispatch }) => {
       const data = await userService.registerUser(user);
-      if (data.authResult?.isAuthorized) dispatch(toggleIsAuth());
+      if (data.authResult?.isAuthorized) {
+        dispatch(toggleIsAuth());
+      }
     }
   ),
   getUserById: createAsyncThunk(

@@ -9,6 +9,7 @@ import { Genre } from "@/typings/models/genre";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createMovie } from "@/store/features/movieSlice";
 import { getAllGenres, selectGenre } from "@/store/features/genreSlice";
+import { Artist } from "@/typings/models/artist";
 
 interface Props {
   onClose: any;
@@ -21,10 +22,18 @@ export default function CreateMovieThread({ onClose }: Props) {
     title: "",
     description: "",
     genre: "",
-    director: "",
+    director: { name: "", description: "", movies: [] },
+    thumbnail: "",
+    comments: [],
     artists: [],
+    ratings: [],
+    averageRating: 0,
   });
-  const [newArtist, setNewArtist] = useState<string>("");
+  const [newArtist, setNewArtist] = useState<Artist>({
+    name: "",
+    description: "",
+    movies: [],
+  });
 
   const renderArtistInputFields = movie.artists!.map((artist, index) => {
     return (
@@ -32,11 +41,11 @@ export default function CreateMovieThread({ onClose }: Props) {
         key={index}
         name={InputFieldName.ARTIST + (index + 1)}
         type={InputFieldType.TEXT}
-        value={artist}
+        value={artist.name}
         label={InputFieldLabel.ARTIST + (index + 1)}
         onChange={(e) =>
           setMovie((prevState: Movie) => {
-            prevState.artists![index] = e.target.value;
+            prevState.artists![index].name = e.target.value;
             return {
               ...prevState,
             };
@@ -46,7 +55,7 @@ export default function CreateMovieThread({ onClose }: Props) {
     );
   });
 
-  const moveNewArtistToMovieObject = () => {
+  const handleAddArtistButton = () => {
     if (!newArtist) return;
     setMovie((prevState: Movie) => {
       prevState.artists!.push(newArtist);
@@ -54,21 +63,57 @@ export default function CreateMovieThread({ onClose }: Props) {
         ...prevState,
       };
     });
-    setNewArtist("");
+    setNewArtist({ name: "", description: "", movies: [] });
   };
 
   const renderGenreOptions = genres.map((genre: Genre, index: number) => (
-    <option key={index}>{genre.name}</option>
+    <option key={index} value={genre.id}>
+      {genre.name}
+    </option>
   ));
 
   const handleSubmitting = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await dispatch(createMovie(movie));
+    const temp = movie;
+    temp.artists!.push(newArtist);
+    await dispatch(createMovie(temp));
+    initializeState();
+    onClose();
+  };
+
+  const initializeState = () => {
+    setMovie({
+      title: "",
+      description: "",
+      genre: "",
+      director: { name: "", description: "", movies: [] },
+      thumbnail: "",
+      comments: [],
+      artists: [],
+      ratings: [],
+      averageRating: 0,
+    });
+    setNewArtist({ name: "", description: "", movies: [] });
   };
 
   useEffect(() => {
     dispatch(getAllGenres());
   }, []);
+
+  useEffect(() => {
+    if (genres.length != 0)
+      setMovie({
+        title: "",
+        description: "",
+        genre: genres[0].id!,
+        director: { name: "", description: "", movies: [] },
+        thumbnail: "",
+        comments: [],
+        artists: [],
+        ratings: [],
+        averageRating: 0,
+      });
+  }, [genres]);
 
   return (
     <CreateMovieThreadContainer>
@@ -137,14 +182,19 @@ export default function CreateMovieThread({ onClose }: Props) {
           name={InputFieldName.DIRECTOR}
           type={InputFieldType.TEXT}
           label={InputFieldLabel.DIRECTOR}
-          value={movie.director!}
+          value={movie.director?.name!}
           onChange={(e: any) =>
             setMovie((prevState: Movie) => ({
               ...prevState,
-              director: e.target.value,
+              director: {
+                name: e.target.value,
+                description: "",
+                movies: [],
+              },
             }))
           }
           placeHolder={"Optional"}
+          isRequired={false}
         />
         {renderArtistInputFields}
         <div className="artistAddWrapper">
@@ -152,10 +202,17 @@ export default function CreateMovieThread({ onClose }: Props) {
             name={InputFieldName.ARTIST}
             type={InputFieldType.TEXT}
             label={InputFieldLabel.ARTIST + (movie.artists!.length + 1)}
-            value={newArtist}
-            onChange={(e) => setNewArtist(e.target.value)}
+            value={newArtist.name}
+            onChange={(e) =>
+              setNewArtist({
+                name: e.target.value,
+                description: "",
+                movies: [],
+              })
+            }
+            placeHolder={"Optional"}
+            isRequired={false}
           />
-
           <Button
             type={ButtonType.BUTTON}
             padding={"6px 12px"}
@@ -166,7 +223,7 @@ export default function CreateMovieThread({ onClose }: Props) {
             backgroundColorOnHover={Colors.LIGHT_BLACK}
             fontWeight={"500"}
             color={Colors.WHITE}
-            onClick={() => moveNewArtistToMovieObject()}
+            onClick={() => handleAddArtistButton()}
           />
         </div>
       </FormContainer>

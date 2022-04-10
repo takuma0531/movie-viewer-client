@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { Button, InputField, Select } from "./form";
 import { Colors } from "@/enums/style";
 import { Gender } from "@/enums/userInfo";
@@ -13,11 +14,18 @@ import {
 import { User } from "@/typings/models/user";
 import countriesData from "public/assets/countryInfo.json";
 import genderListData from "public/assets/genderList.json";
-import { useAppDispatch } from "@/store/hooks";
-import { registerUser, loginUser } from "@/store/features/userSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  registerUser,
+  loginUser,
+  selectUser,
+} from "@/store/features/userSlice";
+import { RoutePath } from "@/enums/routePath";
 
 export default function SignIn() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAppSelector(selectUser);
 
   const [isSignIn, toggleIsSignIn] = useState(true);
   const [user, setUser] = useState<User>({
@@ -28,6 +36,7 @@ export default function SignIn() {
     continent: "Asia",
     age: 20,
     gender: Gender.MALE,
+    movies: [],
   });
   const [countries, setCountries] = useState<
     { country: string; continent: string }[]
@@ -36,9 +45,11 @@ export default function SignIn() {
     { value: number; category: string }[]
   >([]);
 
-  const handleSubmitting = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitting = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    isSignIn ? dispatch(loginUser(user)) : dispatch(registerUser(user));
+    isSignIn
+      ? await dispatch(loginUser(user))
+      : await dispatch(registerUser(user));
   };
 
   const returnCountryOptions = countries.map((country, index) => (
@@ -73,6 +84,10 @@ export default function SignIn() {
     setCountries(countriesData);
     setGenderList(genderListData);
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) navigate(RoutePath.HOME);
+  }, [isAuthenticated]);
 
   return (
     <SignInContainer className="signIn">

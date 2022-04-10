@@ -25,6 +25,7 @@ export default function SignIn() {
     password: "",
     name: "",
     country: "Afghanistan",
+    continent: "Asia",
     age: 20,
     gender: Gender.MALE,
   });
@@ -41,7 +42,11 @@ export default function SignIn() {
   };
 
   const returnCountryOptions = countries.map((country, index) => (
-    <option key={index} value={country.country}>
+    <option
+      key={index}
+      value={country.country}
+      data-continent={country.continent}
+    >
       {country.country}
     </option>
   ));
@@ -51,6 +56,18 @@ export default function SignIn() {
       {gender.category}
     </option>
   ));
+
+  const onChangeCountry = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const continent = e.target.selectedOptions[0].getAttribute(
+      "data-continent"
+    ) as string;
+    const country = e.target.value;
+    setUser((prevState: User) => ({
+      ...prevState,
+      country,
+      continent,
+    }));
+  };
 
   useEffect(() => {
     setCountries(countriesData);
@@ -103,12 +120,7 @@ export default function SignIn() {
               name={InputFieldName.COUNTRY}
               label={InputFieldLabel.COUNTRY}
               selectValue={user.country}
-              onChange={(e: any) =>
-                setUser((prevState: User) => ({
-                  ...prevState,
-                  country: e.target.value,
-                }))
-              }
+              onChange={(e: any) => onChangeCountry(e)}
               options={returnCountryOptions}
             />
             <Select

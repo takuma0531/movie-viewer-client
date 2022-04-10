@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Button, InputField, Select } from "../form";
-import {
-  InputFieldName,
-  InputFieldType,
-  ButtonText,
-  InputFieldLabel,
-} from "@/enums/form";
+import { InputFieldName, InputFieldType, ButtonText } from "@/enums/form";
 import { Colors } from "@/enums/style";
 import { Rating } from "@/typings/models/rating";
 import { Comment } from "@/typings/models/comment";
+import { useAppDispatch } from "@/store/hooks";
+import { createComment } from "@/store/features/commentSlice";
+import { createRating } from "@/store/features/ratingSlice";
 
 export default function CommentInputField() {
+  const dispatch = useAppDispatch();
+
   const [rating, setRating] = useState<Rating>({
     point: 1,
   });
@@ -27,6 +27,12 @@ export default function CommentInputField() {
   const handleSubmitting = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("submit rating or comment data");
+    if (comment) {
+      setComment((prevState: Comment) => ({ ...prevState, rating: rating }));
+      dispatch(createComment(comment));
+    } else {
+      dispatch(createRating(rating));
+    }
   };
 
   return (

@@ -2,15 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { Colors } from "@/enums/style";
 import CommentList from "./section/CommentList";
-import { Movie } from "@/typings/models/movie";
+import { selectMovie } from "@/store/features/movieSlice";
+import { useAppSelector } from "@/store/hooks";
+import { Artist } from "@/typings/models/artist";
 
 export default function MovieDetails() {
-  const movie: Movie = {
-    title: "title1",
-    genre: "genre1",
-    description:
-      "desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1desc1 desc1 desc1desc1 desc1 desc1desc1 desc1 desc1",
-  };
+  const { movie } = useAppSelector(selectMovie);
+
+  const renderArtists = movie.artists?.map((artist: Artist) => (
+    <div>{artist.name}</div>
+  ));
 
   return (
     <MovieDetailsContainer>
@@ -23,7 +24,7 @@ export default function MovieDetails() {
             <p>{movie.description}</p>
           </div>
           <div className="ratingWrapper">
-            <div className="rating">Rating: 0/5</div>
+            <div className="rating">Rating: {movie.averageRating}/5</div>
             <div className="ratingButtonWrapper">rating button</div>
           </div>
         </div>
@@ -31,10 +32,14 @@ export default function MovieDetails() {
           <div className="thumbnail"></div>
           <div className="stakeholders">
             <div>
-              <p>Director: </p>
-              {movie.director}
-              <p>Artists: </p>
-              artist1, artist2, artist3
+              <div>
+                <p>Director: </p>
+                <div>{movie.director}</div>
+              </div>
+              <div>
+                <p>Artist: </p>
+                {renderArtists}
+              </div>
             </div>
           </div>
         </div>
@@ -42,7 +47,7 @@ export default function MovieDetails() {
       <div className="lowerRow">
         <h3 className="commentHeader">Comments</h3>
         <div className="commentListWrapper">
-          <CommentList />
+          <CommentList comments={movie.comments} />
         </div>
       </div>
     </MovieDetailsContainer>

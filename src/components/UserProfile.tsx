@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Colors } from "@/enums/style";
-import { User } from "@/typings/models/user";
 import { Movie } from "@/typings/models/movie";
 import { ButtonText } from "@/enums/form";
 import MovieArticle from "./section/MovieArticle";

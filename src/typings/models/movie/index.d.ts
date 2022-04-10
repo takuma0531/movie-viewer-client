@@ -1,3 +1,4 @@
+import { Artist } from "../artist";
 import { Comment } from "../comment";
 import { Rating } from "../rating";
 import { User } from "../user";
@@ -9,7 +10,7 @@ export interface Movie {
   description: string;
   thumbnail?: Buffer | string;
   director?: string;
-  artists?: string[];
+  artists?: Artist[];
   user?: string | User;
   averageRating?: number;
   comments?: Comment[];

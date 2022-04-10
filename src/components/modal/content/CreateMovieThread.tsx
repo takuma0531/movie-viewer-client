@@ -75,7 +75,7 @@ export default function CreateMovieThread({ onClose }: Props) {
   const handleSubmitting = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const temp = movie;
-    temp.artists!.push(newArtist);
+    if (newArtist.name) temp.artists!.push(newArtist);
     await dispatch(createMovie(temp));
     initializeState();
     onClose();

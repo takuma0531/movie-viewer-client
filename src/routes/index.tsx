@@ -8,9 +8,11 @@ import {
   UserProfilePage,
 } from "@/pages";
 import { RoutePath } from "@/enums/routePath";
+import { selectUser } from "@/store/features/userSlice";
+import { useAppSelector } from "@/store/hooks";
 
 export default function RouteHandler() {
-  const isAuthenticated = true;
+  const { isAuthenticated } = useAppSelector(selectUser);
 
   return (
     <BrowserRouter>

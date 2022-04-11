@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Colors } from "@/enums/style";
 import CommentList from "./section/CommentList";
+import ViewRatingButton from "./utils/ViewRatingButton";
 import { selectMovie } from "@/store/features/movieSlice";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { Artist } from "@/typings/models/artist";
@@ -36,7 +37,9 @@ export default function MovieDetails() {
           </div>
           <div className="ratingWrapper">
             <div className="rating">Rating: {movie.averageRating}/5</div>
-            <div className="ratingButtonWrapper">rating button</div>
+            <div className="ratingButtonWrapper">
+              <ViewRatingButton />
+            </div>
           </div>
         </div>
         <div className="right">
@@ -98,6 +101,7 @@ const MovieDetailsContainer = styled.div`
       .ratingWrapper {
         display: flex;
         flex-direction: row;
+        align-items: center;
         margin: 10px 0;
 
         .rating {

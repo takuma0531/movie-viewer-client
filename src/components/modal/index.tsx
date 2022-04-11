@@ -33,7 +33,7 @@ const ModalWrapperContainer = styled.div`
   width: 100vw;
   height: 100vh;
   background: ${Colors.LIGHT_GRAY};
-  index: 0;
+  z-index: 1;
 
   div.modal-main {
     position: fixed;

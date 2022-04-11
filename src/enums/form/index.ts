@@ -44,6 +44,7 @@ export enum ButtonText {
   CLOSE = "Close",
   CREATEMOVIE = "Create Movie",
   ADD = "Add",
+  VIEWSRATINGSTATISTICS = "View Rating Statistics",
 }
 
 export enum ButtonType {

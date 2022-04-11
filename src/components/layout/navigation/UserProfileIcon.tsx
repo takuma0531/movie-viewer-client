@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Colors } from "@/enums/style";
 import { RoutePath } from "@/enums/routePath";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
-import { selectUser, logoutUser } from "@/store/features/userSlice";
+import {
+  selectUser,
+  logoutUser,
+  getUserById,
+} from "@/store/features/userSlice";
 
 interface Props {}
 
@@ -13,13 +17,21 @@ export default function UserProfileIcon({}: Props) {
   const dispatch = useAppDispatch();
 
   const { user, isAuthenticated } = useAppSelector(selectUser);
-  const head = user.name?.charAt(0).toUpperCase() || "N";
+  const [head, setHead] = useState("N");
   const [isProfileMenuOpen, toggleIsProfileMenuOpen] = useState<boolean>(false);
 
   const handleLogout = () => {
     dispatch(logoutUser());
     navigate(RoutePath.HOME);
   };
+
+  useEffect(() => {
+    if (user.name) setHead(user.name!.charAt(0).toUpperCase());
+  }, [user]);
+
+  useEffect(() => {
+    dispatch(getUserById());
+  }, []);
 
   return (
     <UserProfileIconContainer>
@@ -84,6 +96,7 @@ const UserProfileIconContainer = styled.div`
       left: -180%;
       margin-top: 50px;
       padding: 5px 0;
+      z-index: 1;
 
       li {
         width: 90%;

@@ -31,7 +31,7 @@ export default function UserProfile() {
   useEffect(() => {
     dispatch(getUserById());
     toggleVisibilityForUpdatingUserProfile.current(false);
-  });
+  }, []);
 
   return (
     <UserProfileContainer>
@@ -128,7 +128,7 @@ const UserProfileContainer = styled.div`
   }
 
   .movieList {
-    width: 70%;
+    width: 100%;
     height: 70%;
     overflow-y: scroll;
   }

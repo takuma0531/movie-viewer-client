@@ -10,8 +10,8 @@ import {
 import { Colors } from "@/enums/style";
 import { User } from "@/typings/models/user";
 import countriesData from "public/assets/countryInfo.json";
-import { useAppDispatch } from "@/store/hooks";
-import { updateUser } from "@/store/features/userSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { selectUser, updateUser } from "@/store/features/userSlice";
 
 interface Props {
   onClose: any;
@@ -19,11 +19,8 @@ interface Props {
 
 export default function UpdateUserProfile({ onClose }: Props) {
   const dispatch = useAppDispatch();
-  const [user, setUser] = useState<User>({
-    email: "",
-    name: "",
-    country: "",
-  });
+  const { user } = useAppSelector(selectUser);
+  const [userState, setUserState] = useState<User>({});
   const [countries, setCountries] = useState<
     { country: string; continent: string }[]
   >([]);
@@ -37,12 +34,13 @@ export default function UpdateUserProfile({ onClose }: Props) {
   const handleSubmitting = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("update user");
-    await dispatch(updateUser(user));
+    await dispatch(updateUser(userState));
     onClose();
   };
 
   useEffect(() => {
     setCountries(countriesData);
+    setUserState(user);
   }, []);
 
   return (
@@ -71,10 +69,10 @@ export default function UpdateUserProfile({ onClose }: Props) {
         <InputField
           name={InputFieldName.NAME}
           type={InputFieldType.TEXT}
-          value={user.name!}
+          value={userState.name!}
           label={InputFieldLabel.NAME}
           onChange={(e) =>
-            setUser((prevState: User) => ({
+            setUserState((prevState: User) => ({
               ...prevState,
               name: e.target.value,
             }))
@@ -83,10 +81,10 @@ export default function UpdateUserProfile({ onClose }: Props) {
         <InputField
           name={InputFieldName.EMAIL}
           type={InputFieldType.EMAIL}
-          value={user.email!}
+          value={userState.email!}
           label={InputFieldLabel.EMAIL}
           onChange={(e) =>
-            setUser((prevState: User) => ({
+            setUserState((prevState: User) => ({
               ...prevState,
               email: e.target.value,
             }))
@@ -95,9 +93,9 @@ export default function UpdateUserProfile({ onClose }: Props) {
         <Select
           name={InputFieldName.COUNTRY}
           label={InputFieldLabel.COUNTRY}
-          selectValue={user.country}
+          selectValue={userState.country}
           onChange={(e: any) =>
-            setUser((prevState: User) => ({
+            setUserState((prevState: User) => ({
               ...prevState,
               country: e.target.value,
             }))

@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Colors } from "@/enums/style";
+import { User } from "@/typings/models/user";
 import { Comment } from "@/typings/models/comment";
+import { Rating } from "@/typings/models/rating";
 
 interface Props {
   comment: Comment;
 }
 
 export default function CommentRow({ comment }: Props) {
-  const head = comment.user?.name?.charAt(0).toUpperCase() || "N";
+  const [head, setHead] = useState("N");
+  const [castedUser, setCastedUser] = useState<User>({});
+  const [castedRating, setCastedRating] = useState<Rating>({});
+
+  useEffect(() => {
+    const tempCastedUser = comment.user as User;
+    if (tempCastedUser.name) {
+      setCastedUser(tempCastedUser);
+      setHead(tempCastedUser.name!.charAt(0).toUpperCase());
+      setCastedRating(comment.rating as Rating);
+    }
+  }, [comment.user]);
 
   return (
     <CommentRowContainer>
@@ -19,8 +32,8 @@ export default function CommentRow({ comment }: Props) {
       </div>
       <div className="right">
         <div className="commentHeader">
-          <div className="username">{comment.user?.name}</div>
-          <div>Rating: {comment.rating?.point}</div>
+          <div className="username">{castedUser.name}</div>
+          <div>Rating: {castedRating.point}</div>
         </div>
         <div className="comment">{comment.text}</div>
       </div>
@@ -40,6 +53,7 @@ const CommentRowContainer = styled.div`
     width: 30px;
     height: 30px;
     margin: 5px;
+    position: relative;
 
     p {
       color: ${Colors.WHITE};
@@ -63,6 +77,10 @@ const CommentRowContainer = styled.div`
       .username {
         margin-right: 10px;
       }
+    }
+
+    .comment {
+      color: ${Colors.LIGHT_BLACK};
     }
   }
 `;

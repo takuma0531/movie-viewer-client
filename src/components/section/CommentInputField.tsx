@@ -29,10 +29,14 @@ export default function CommentInputField() {
 
   const handleSubmitting = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submit rating or comment data");
     if (comment.text) {
-      setComment((prevState: Comment) => ({ ...prevState, rating: rating }));
-      dispatch(createComment(comment));
+      const commentCreateDto: Comment = {
+        ...comment,
+        rating: {
+          ...rating,
+        },
+      };
+      dispatch(createComment(commentCreateDto));
     } else {
       dispatch(createRating(rating));
     }

@@ -48,14 +48,14 @@ const thunkFunctions = {
     AsyncThunkTypeUser.GET_USER_BY_ID,
     async (arg: void, { dispatch }) => {
       const data = await userService.getUserById();
-      if (data) dispatch(updateUser(data));
+      if (data) dispatch(replaceUser(data));
     }
   ),
   updateUser: createAsyncThunk(
     AsyncThunkTypeUser.UPDATE_USER,
     async (user: User, { dispatch }) => {
       const data = await userService.updateUser(user);
-      if (data) dispatch(updateUser(data));
+      if (data) dispatch(replaceUser(data));
     }
   ),
   loginUser: createAsyncThunk(
@@ -69,7 +69,7 @@ const thunkFunctions = {
     AsyncThunkTypeUser.DELETE_USER,
     async (arg: void, { dispatch }) => {
       await userService.deleteUser();
-      dispatch(updateUser({}));
+      dispatch(replaceUser({}));
       dispatch(toggleIsAuth());
     }
   ),

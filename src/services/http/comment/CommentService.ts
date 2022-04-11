@@ -38,6 +38,7 @@ class CommentService extends BaseHttpService implements ICommentService {
 
   public async createComment(comment: Comment): Promise<Comment> {
     try {
+      console.log(comment);
       this.setToken();
       const { data } = await this.axiosApi.post<Comment>(
         `${this.BASE_ROUTE}`,

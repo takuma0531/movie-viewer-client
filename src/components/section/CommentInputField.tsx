@@ -8,26 +8,29 @@ import { Comment } from "@/typings/models/comment";
 import { useAppDispatch } from "@/store/hooks";
 import { createComment } from "@/store/features/commentSlice";
 import { createRating } from "@/store/features/ratingSlice";
+import { UrlQueryHelper } from "@/utils/UrlQueryHelper";
 
 export default function CommentInputField() {
   const dispatch = useAppDispatch();
 
   const [rating, setRating] = useState<Rating>({
     point: 1,
+    movie: UrlQueryHelper.getMovieId(),
   });
   const [comment, setComment] = useState<Comment>({
     text: "",
+    movie: UrlQueryHelper.getMovieId(),
   });
   const ratingScale = [1, 2, 3, 4, 5];
 
-  const renderRatingOptions = ratingScale.map(
-    (point: number, index: number) => <option key={index}>{point}</option>
-  );
+  const renderRatingOptions = ratingScale.map((point: number) => (
+    <option key={point}>{point}</option>
+  ));
 
   const handleSubmitting = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("submit rating or comment data");
-    if (comment) {
+    if (comment.text) {
       setComment((prevState: Comment) => ({ ...prevState, rating: rating }));
       dispatch(createComment(comment));
     } else {

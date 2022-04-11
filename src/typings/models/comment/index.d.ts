@@ -4,7 +4,7 @@ import { User } from "../user";
 
 export interface Comment {
   text?: string;
-  movie?: Movie;
-  user?: User;
-  rating?: Rating;
+  movie?: Movie | string;
+  user?: User | string;
+  rating?: Rating | string;
 }

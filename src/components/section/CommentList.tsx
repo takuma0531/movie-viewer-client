@@ -9,8 +9,8 @@ interface Props {
 }
 
 export default function CommentList({ comments }: Props) {
-  const renderComments = comments?.map((comment: Comment) => {
-    return <CommentRow comment={comment} />;
+  const renderComments = comments?.map((comment: Comment, index: number) => {
+    return <CommentRow key={index} comment={comment} />;
   });
 
   return (

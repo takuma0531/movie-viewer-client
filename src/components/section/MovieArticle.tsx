@@ -20,7 +20,7 @@ export default function MovieArticle({ movie }: Props) {
     <MovieArticleContainer onClick={() => handleClick()}>
       <div className="header">
         <h3>{movie.title}</h3>
-        <div className="rating">Rating: 0/5</div>
+        <div className="rating">Rating: {movie.averageRating}/5</div>
       </div>
       <div className="body">
         <div className="thumbnail">{movie.thumbnail || "thumnail"}</div>
@@ -60,14 +60,14 @@ const MovieArticleContainer = styled.div`
     height: 80%;
 
     .thumbnail {
-      width: 40%;
+      width: 30%;
       height: 100%;
     }
 
     .description {
       overflow: hidden;
       line-height: 1.5;
-      width: 55%;
+      width: 65%;
       max-height: 100%;
       text-align: left;
       -webkit-box-orient: vertical;

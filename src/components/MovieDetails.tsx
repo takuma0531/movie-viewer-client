@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Colors } from "@/enums/style";
 import CommentList from "./section/CommentList";
 import { selectMovie } from "@/store/features/movieSlice";
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { Artist } from "@/typings/models/artist";
+import { getMovieById } from "@/store/features/movieSlice";
+import { RoutePath } from "@/enums/routePath";
 
 export default function MovieDetails() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { movie } = useAppSelector(selectMovie);
 
-  const renderArtists = movie.artists?.map((artist: Artist) => (
-    <div>{artist.name}</div>
+  const renderArtists = movie.artists?.map((artist: Artist, index: number) => (
+    <div key={index}>{artist.name}</div>
   ));
+
+  useEffect(() => {
+    const movieId = window.location.search.substring(1).split("=")[1];
+    if (movieId) dispatch(getMovieById(movieId));
+    else navigate(RoutePath.HOME);
+  }, []);
 
   return (
     <MovieDetailsContainer>
@@ -34,7 +45,7 @@ export default function MovieDetails() {
             <div>
               <div>
                 <p>Director: </p>
-                <div>{movie.director}</div>
+                <div>{movie.director?.name}</div>
               </div>
               <div>
                 <p>Artist: </p>

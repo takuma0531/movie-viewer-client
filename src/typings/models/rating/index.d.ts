@@ -3,8 +3,8 @@ import { User } from "../user";
 
 export interface Rating {
   point?: number;
-  movie?: Movie;
-  user?: User;
+  movie?: Movie | string;
+  user?: User | string;
 }
 
 export interface RatingsFilteredByUserAge {

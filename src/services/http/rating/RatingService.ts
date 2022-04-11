@@ -10,7 +10,7 @@ import {
 const URL_PATH = {
   USER_AGE: "movie/user-age",
   USER_CONTINENT: "movie/user-continent",
-  uSER_GENDER: "movie/user-gender",
+  USER_GENDER: "movie/user-gender",
 };
 
 const URL_QUERY = {
@@ -50,8 +50,9 @@ class RatingService extends BaseHttpService implements IRatingService {
     movieId: string
   ): Promise<RatingSortedByUserGender> {
     try {
-      const { data } = await this.axiosApi.get<RatingSortedByUserGender>(`
-        ${this.BASE_ROUTE}/${URL_PATH.uSER_GENDER}?${URL_QUERY.MOVIEID}=${movieId}`);
+      const { data } = await this.axiosApi.get<RatingSortedByUserGender>(
+        `${this.BASE_ROUTE}/${URL_PATH.USER_GENDER}?${URL_QUERY.MOVIEID}=${movieId}`
+      );
       return data;
     } catch (err: any) {
       throw err;

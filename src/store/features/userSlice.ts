@@ -20,6 +20,9 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     replaceUser: (state, action: PayloadAction<User>) => {
+      if (action.payload.movies?.length != 0) {
+        action.payload.movies = action.payload.movies?.reverse();
+      }
       state.user = action.payload;
     },
     toggleIsAuth: (state) => {

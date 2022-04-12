@@ -20,7 +20,11 @@ interface Props {
 export default function UpdateUserProfile({ onClose }: Props) {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectUser);
-  const [userState, setUserState] = useState<User>({});
+  const [userState, setUserState] = useState<User>({
+    name: "",
+    email: "",
+    country: "",
+  });
   const [countries, setCountries] = useState<
     { country: string; continent: string }[]
   >([]);

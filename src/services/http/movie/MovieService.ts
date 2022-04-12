@@ -92,6 +92,14 @@ class MovieService extends BaseHttpService implements IMovieService {
       throw err;
     }
   }
+
+  public async uploadMovieImage(data: any): Promise<any> {
+    try {
+      await this.axiosApi.post<any>("https://api.imgur.com/3/image", data);
+    } catch (err: any) {
+      throw err;
+    }
+  }
 }
 
 export const movieService = new MovieService();

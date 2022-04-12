@@ -43,7 +43,9 @@ export default function MovieDetails() {
           </div>
         </div>
         <div className="right">
-          <div className="thumbnail"></div>
+          <div className="thumbnail">
+            <img src={movie.thumbnail} alt="thumbnail" />
+          </div>
           <div className="stakeholders">
             <div>
               <div>
@@ -118,6 +120,11 @@ const MovieDetailsContainer = styled.div`
         height: 60%;
         max-height: 60%;
         border: 1px solid ${Colors.WHITE_GRAY};
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
 
       .stakeholders {

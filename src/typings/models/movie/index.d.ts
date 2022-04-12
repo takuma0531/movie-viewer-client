@@ -9,7 +9,7 @@ export interface Movie {
   title: string;
   genre: string;
   description: string;
-  thumbnail?: Buffer | string;
+  thumbnail?: Buffer | string | any;
   director?: Director;
   artists?: Artist[];
   user?: string | User;

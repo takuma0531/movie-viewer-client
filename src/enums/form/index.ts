@@ -11,6 +11,7 @@ export enum InputFieldName {
   GENRE = "genre",
   DIRECTOR = "director",
   ARTIST = "artist",
+  THUMBNAIL_URL = "thumbnail_url",
 }
 
 export enum InputFieldType {
@@ -26,6 +27,7 @@ export enum InputFieldLabel {
   PASSWORD = "Password",
   NAME = "Name",
   COUNTRY = "Country",
+  THUMBNAIL = "Thumbnail",
   AGE = "Age",
   GENDER = "Gender",
   TITLE = "Title",
@@ -33,6 +35,7 @@ export enum InputFieldLabel {
   GENRE = "Genre",
   DIRECTOR = "Director",
   ARTIST = "Artist",
+  THUMBNAIL_URL = "Thumbnail Url",
 }
 
 export enum ButtonText {

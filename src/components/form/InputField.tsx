@@ -18,7 +18,7 @@ interface Props extends StyleProps {
   label?: string;
   isLabelRequired?: boolean;
   type: string;
-  value: string | number;
+  value?: string | number;
   minLength?: number;
   isRequired?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;

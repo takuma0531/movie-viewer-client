@@ -107,7 +107,7 @@ export default function CreateMovieThread({ onClose }: Props) {
         description: "",
         genre: genres[0].id!,
         director: { name: "", description: "", movies: [] },
-        thumbnail: "",
+        thumbnail: {},
         comments: [],
         artists: [],
         ratings: [],
@@ -168,16 +168,25 @@ export default function CreateMovieThread({ onClose }: Props) {
           name={InputFieldName.GENRE}
           label={InputFieldLabel.GENRE}
           selectValue={movie.genre}
-          onChange={(e: any) =>
+          onChange={(e: any) => {
             setMovie((prevState: Movie) => ({
               ...prevState,
               genre: e.target.value,
-            }))
-          }
+            }));
+          }}
           options={renderGenreOptions}
         />
-        {/* Thumbnail to add TODO: */}
-        thumbnail field
+        <InputField
+          type={InputFieldType.TEXT}
+          name={InputFieldName.THUMBNAIL_URL}
+          label={InputFieldLabel.THUMBNAIL_URL}
+          onChange={(e: any) => {
+            setMovie((prevState: Movie) => ({
+              ...prevState,
+              thumbnail: e.target.value,
+            }));
+          }}
+        />
         <InputField
           name={InputFieldName.DIRECTOR}
           type={InputFieldType.TEXT}

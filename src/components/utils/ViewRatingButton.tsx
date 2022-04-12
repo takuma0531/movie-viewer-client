@@ -10,7 +10,7 @@ export default function ViewRatingButton() {
   const toggleVisibilityOfRatingStatistics = useRef<any>();
 
   useEffect(() => {
-    toggleVisibilityOfRatingStatistics.current(true);
+    toggleVisibilityOfRatingStatistics.current(false);
   });
 
   return (

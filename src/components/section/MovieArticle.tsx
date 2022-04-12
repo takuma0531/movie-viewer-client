@@ -23,7 +23,9 @@ export default function MovieArticle({ movie }: Props) {
         <div className="rating">Rating: {movie.averageRating}/5</div>
       </div>
       <div className="body">
-        <div className="thumbnail">{movie.thumbnail || "thumnail"}</div>
+        <div className="thumbnail">
+          <img src={movie.thumbnail} alt="thumbnail" />
+        </div>
         <div className="description">{movie.description}</div>
       </div>
     </MovieArticleContainer>
@@ -62,6 +64,11 @@ const MovieArticleContainer = styled.div`
     .thumbnail {
       width: 30%;
       height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
 
     .description {

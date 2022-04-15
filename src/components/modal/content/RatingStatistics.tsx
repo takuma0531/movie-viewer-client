@@ -52,19 +52,27 @@ export default function RatingStatistics({ onClose }: Props) {
         <div>
           <div className="RatingDataSection">
             <p>~20</p>
-            <div>{ratingsFilteredByUserAge.lte20 || 0} out of 5</div>
+            <div>
+              {ratingsFilteredByUserAge.lte20?.toFixed(1) || 0} out of 5
+            </div>
           </div>
           <div className="RatingDataSection">
             <p>21~40</p>
-            <div>{ratingsFilteredByUserAge.lte40 || 0} out of 5</div>
+            <div>
+              {ratingsFilteredByUserAge.lte40?.toFixed(1) || 0} out of 5
+            </div>
           </div>
           <div className="RatingDataSection">
             <p>41~60</p>
-            <div>{ratingsFilteredByUserAge.lte60 || 0} out of 5</div>
+            <div>
+              {ratingsFilteredByUserAge.lte60?.toFixed(1) || 0} out of 5
+            </div>
           </div>
           <div className="RatingDataSection">
             <p>61~</p>
-            <div>{ratingsFilteredByUserAge.gte61 || 0} out of 5</div>
+            <div>
+              {ratingsFilteredByUserAge.gte61?.toFixed(1) || 0} out of 5
+            </div>
           </div>
         </div>
       </RatingStatisticsOfAgeContainer>
@@ -73,35 +81,48 @@ export default function RatingStatistics({ onClose }: Props) {
         <div>
           <div className="RatingDataSection">
             <p>Asia</p>
-            <div>{ratingsFilteredByUserLocation.asia || 0} out of 5</div>
+            <div>
+              {ratingsFilteredByUserLocation.asia?.toFixed(1) || 0} out of 5
+            </div>
           </div>
           <div className="RatingDataSection">
             <p>Africa</p>
-            <div>{ratingsFilteredByUserLocation.africa || 0} out of 5</div>
+            <div>
+              {ratingsFilteredByUserLocation.africa?.toFixed(1) || 0} out of 5
+            </div>
           </div>
           <div className="RatingDataSection">
             <p>Europe</p>
-            <div>{ratingsFilteredByUserLocation.europe || 0} out of 5</div>
+            <div>
+              {ratingsFilteredByUserLocation.europe?.toFixed(1) || 0} out of 5
+            </div>
           </div>
           <div className="RatingDataSection">
             <p>North America</p>
             <div>
-              {ratingsFilteredByUserLocation.northAmerica || 0} out of 5
+              {ratingsFilteredByUserLocation.northAmerica?.toFixed(1) || 0} out
+              of 5
             </div>
           </div>
           <div className="RatingDataSection">
             <p>South America</p>
             <div>
-              {ratingsFilteredByUserLocation.southAmerica || 0} out of 5
+              {ratingsFilteredByUserLocation.southAmerica?.toFixed(1) || 0} out
+              of 5
             </div>
           </div>
           <div className="RatingDataSection">
             <p>Oceania</p>
-            <div>{ratingsFilteredByUserLocation.oceania || 0} out of 5</div>
+            <div>
+              {ratingsFilteredByUserLocation.oceania?.toFixed(1) || 0} out of 5
+            </div>
           </div>
           <div className="RatingDataSection">
             <p>Antarctica</p>
-            <div>{ratingsFilteredByUserLocation.antarctica || 0} out of 5</div>
+            <div>
+              {ratingsFilteredByUserLocation.antarctica?.toFixed(1) || 0} out of
+              5
+            </div>
           </div>
         </div>
       </RatingStatisticsOfLocationContainer>
@@ -110,15 +131,19 @@ export default function RatingStatistics({ onClose }: Props) {
         <div>
           <div className="RatingDataSection">
             <p>Male</p>
-            <div>{ratingSortedByUserGender.male || 0} out of 5</div>
+            <div>{ratingSortedByUserGender.male?.toFixed(1) || 0} out of 5</div>
           </div>
           <div className="RatingDataSection">
             <p>Female</p>
-            <div>{ratingSortedByUserGender.female || 0} out of 5</div>
+            <div>
+              {ratingSortedByUserGender.female?.toFixed(1) || 0} out of 5
+            </div>
           </div>
           <div className="RatingDataSection">
             <p>Unknown</p>
-            <div>{ratingSortedByUserGender.unknown || 0} out of 5</div>
+            <div>
+              {ratingSortedByUserGender.unknown?.toFixed(1) || 0} out of 5
+            </div>
           </div>
         </div>
       </RatingStatisticsGenderContainer>

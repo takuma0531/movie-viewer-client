@@ -20,7 +20,9 @@ export default function MovieArticle({ movie }: Props) {
     <MovieArticleContainer onClick={() => handleClick()}>
       <div className="header">
         <h3>{movie.title}</h3>
-        <div className="rating">Rating: {movie.averageRating}/5</div>
+        <div className="rating">
+          Rating: {movie.averageRating?.toFixed(1)}/5
+        </div>
       </div>
       <div className="body">
         <div className="thumbnail">
